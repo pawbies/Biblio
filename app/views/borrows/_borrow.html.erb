@@ -1,0 +1,47 @@
+<div id="<%= dom_id borrow %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Ausleihdatum:</strong>
+    <%= borrow.borrow_date %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Rückgabedatum:</strong>
+    <%= borrow.return_date %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Tatsächliches Rückgabedatum:</strong>
+    <%= borrow.actual_return_date %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Zurückgebracht:</strong>
+    <%= borrow.returned ? "Ja" : "Nein" %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Bibliothekar:</strong>
+    <%= "#{borrow.librarian.firstname} #{borrow.librarian.lastname}" %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Vorname:</strong>
+    <%= borrow.firstname %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Nachname:</strong>
+    <%= borrow.lastname %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Telefon:</strong>
+    <%= borrow.phone %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Email:</strong>
+    <%= borrow.email %>
+  </p>
+
+</div>

@@ -1,0 +1,55 @@
+<div id="<%= dom_id book %>">
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Titel:</strong>
+    <%= book.title %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Beschreibung:</strong>
+    <%= book.description %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Isbn:</strong>
+    <%= book.isbn %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Preis:</strong>
+    <%= book.price %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Verlag:</strong>
+    <%= book.publisher.name %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Kategorien:</strong>
+    <ul>
+      <% book.categories.each do |category| %>
+        <li><%= link_to category.name, category %></li>
+      <% end %>
+    </ul>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Autoren:</strong>
+    <ul>
+      <% book.authors.each do |author| %>
+        <li><%= link_to author.artistname, author %></li>
+      <% end %>
+    </ul>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Kopien:</strong>
+    <%= book.amount %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Verfügbare Kopien:</strong>
+    <%= book.effective_amount %>
+  </p>
+
+</div>

@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  borrow_date: 2024-11-23
+  return_date: 2024-11-23
+  actual_return_date: 2024-11-23
+  returned: false
+  librarian: one
+  firstname: MyString
+  lastname: MyString
+  phone: MyString
+  email: MyString
+
+two:
+  borrow_date: 2024-11-23
+  return_date: 2024-11-23
+  actual_return_date: 2024-11-23
+  returned: false
+  librarian: two
+  firstname: MyString
+  lastname: MyString
+  phone: MyString
+  email: MyString

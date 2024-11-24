@@ -1,0 +1,110 @@
+# Files in the config/locales directory are used for internationalization and
+# are automatically loaded by Rails. If you want to use locales other than
+# English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t "hello"
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t("hello") %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more about the API, please read the Rails Internationalization guide
+# at https://guides.rubyonrails.org/i18n.html.
+#
+# Be aware that YAML interprets the following case-insensitive strings as
+# booleans: `true`, `false`, `on`, `off`, `yes`, `no`. Therefore, these strings
+# must be quoted to be interpreted as strings. For example:
+#
+#     en:
+#       "yes": yup
+#       enabled: "ON"
+de:
+  errors:
+    messages:
+      blank: " darf nicht leer sein."
+      invalid: " ist ungültig."
+      too_short: " ist zu kurz (minimum ist %{count} Zeichen)."
+      too_long: " ist zu lang (maximum ist %{count} Zeichen)."
+      taken: " ist bereits vergeben."
+      not_a_number: " ist keine Zahl."
+      confirmation: " stimmt nicht mit der Bestätigung überein."
+      accepted: " muss akzeptiert werden."
+      greater_than: " muss größer als %{count} sein."
+      less_than: " muss kleiner als %{count} sein."
+      greater_than_or_equal_to: " muss größer oder gleich %{count} sein."
+      less_than_or_equal_to: " muss kleiner oder gleich %{count} sein."
+      even: " muss gerade sein."
+      odd: " muss ungerade sein."
+      wrong_length: " hat die falsche Länge (sollte %{count} Zeichen haben)."
+      not_an_integer: " muss eine ganze Zahl sein."
+      present: " darf nicht ausgefüllt sein."
+      invalid_format: " hat ein ungültiges Format."
+      taken_or_reserved: " ist bereits vergeben oder reserviert."
+      in_list: " ist nicht in der Liste der erlaubten Werte enthalten."
+      not_in_list: " ist in der Liste der verbotenen Werte enthalten."
+      required: " wird benötigt."
+
+
+  activerecord:
+    models:
+      borrow: "Ausleihe"
+      librarian: "Bibliothekar"
+      author: "Autor"
+      book: "Buch"
+
+
+    attributes:
+      borrow:
+        borrow_date: "Ausleihdatum"
+        return_date: "Rückgabedatum"
+        actual_return_date: "Tatsächliches Rückgabedatum"
+        librarian_id: "Bibliothekar"
+        librarian: "Bibliothekar"
+        firstname: "Vorname"
+        lastname: "Nachname"
+        phone: "Telefon"
+        email: "Email"
+        book_ids: "Bücher"
+        books: "Bücher"
+        returned: "Zurückgebracht"
+
+      librarian:
+        firstname: "Vorname"
+        lastname: "Nachname"
+        email: "Email"
+        password: "Passwort"
+        password_confirmation: "Password Bestätigung"
+
+      author:
+        firstname: "Vorname"
+        lastname: "Nachname"
+        artistname: "Künstlername"
+        bio: "Biographie"
+
+      book:
+        title: "Titel"
+        description: "Beschreibung"
+        isbn: "ISBN"
+        price: "Preis"
+        publisher_id: "Verlag"
+        publisher: "Verlag"
+        amount: "Anzahl"
+        author_ids: "Autoren"
+        authors: "Autoren"
+
+      category:
+        name: "Name"
+        description: "Beschreibung"
+
+      publisher:
+        name: "Name"
+        email: "Email"
+        url: "URL"

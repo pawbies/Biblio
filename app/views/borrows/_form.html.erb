@@ -21,14 +21,15 @@
     <%= form.date_field :return_date, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
+  <!--
   <div class="my-5">
   <%= form.label :librarian_id %>
   <%= form.select :librarian_id, 
                 options_for_select(Librarian.all.map { |l| ["#{l.firstname} #{l.lastname}", l.id] }), 
                 { include_blank: "Select a librarian." }, 
-                class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full js-searchable-dropdown", 
-                data: { controller: "select2" } %>
-</div>
+                class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full", 
+  </div>
+  -->
 
   <div class="my-5">
     <%= form.label :firstname %>

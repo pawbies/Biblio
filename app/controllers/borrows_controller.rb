@@ -26,7 +26,7 @@ class BorrowsController < ApplicationController
 
   # POST /borrows or /borrows.json
   def create
-    @borrow = Borrow.new(returned: false, **borrow_params)
+    @borrow = Borrow.new(returned: false, librarian: Current.librarian, **borrow_params)
 
     respond_to do |format|
       if @borrow.save

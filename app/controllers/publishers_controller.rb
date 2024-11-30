@@ -1,10 +1,11 @@
 class PublishersController < ApplicationController
   before_action :set_publisher, only: %i[ show edit update destroy ]
-  before_action :require_librarian!, except: %i[ index show ]
+  before_action :require_librarian!, except: %i[ show ]
+  layout "admin", except: %i[ show ]
 
   # GET /publishers or /publishers.json
   def index
-    @publishers = Publisher.all
+    @publishers = Publisher.all.page(params[:page]).per(30)
   end
 
   # GET /publishers/1 or /publishers/1.json
@@ -26,7 +27,7 @@ class PublishersController < ApplicationController
 
     respond_to do |format|
       if @publisher.save
-        format.html { redirect_to @publisher, notice: "Publisher was successfully created." }
+        format.html { redirect_to @publisher, notice: "Verlag wurde erfolgreich erstellt." }
         format.json { render :show, status: :created, location: @publisher }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +40,7 @@ class PublishersController < ApplicationController
   def update
     respond_to do |format|
       if @publisher.update(publisher_params)
-        format.html { redirect_to @publisher, notice: "Publisher was successfully updated." }
+        format.html { redirect_to @publisher, notice: "Verlag wurde erfolgreich aktualisiert." }
         format.json { render :show, status: :ok, location: @publisher }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,7 +54,7 @@ class PublishersController < ApplicationController
     @publisher.destroy!
 
     respond_to do |format|
-      format.html { redirect_to publishers_path, status: :see_other, notice: "Publisher was successfully destroyed." }
+      format.html { redirect_to publishers_path, status: :see_other, notice: "Verlag wurde erfolgreich gelöscht." }
       format.json { head :no_content }
     end
   end

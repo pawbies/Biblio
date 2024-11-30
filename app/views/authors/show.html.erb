@@ -1,15 +1,72 @@
-<div class="mx-auto md:w-2/3 w-full flex">
-  <div class="mx-auto">
-    <% if notice.present? %>
-      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-    <% end %>
+<div class="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
 
-    <%= render @author %>
+  <div class="flex gap-6">
+    <div class="flex-shrink-0 w-32 h-32 bg-gray-200 flex items-center justify-center rounded-full shadow-md">
+      <% if @author.pfp.attached? %>
+        <%= image_tag @author.pfp, class: "rounded-full w-full h-full object-fill" %>
+      <% else %>
+        <i class="fas fa-user text-gray-400 text-6xl"></i>
+      <% end %>
+    </div>
 
-    <%= link_to "Autor bearbeiten", edit_author_path(@author), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to "Zurück zu Autoren", authors_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to "Autor löschen", @author, method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+    <div>
+      <h1 class="text-3xl font-bold text-gray-800"><%= @author.display_name %></h1>
+      <p class="mt-2 text-gray-600 text-lg"><%= @author.bio %></p>
     </div>
   </div>
+
+
+  <div class="mt-8">
+    <h2 class="text-2xl font-bold text-gray-800">Bücher von <%= @author.display_name %></h2>
+    <% if @author.books.any? %>
+      <div class="mt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <% @author.books.each do |book| %>
+          <div class="border rounded-lg p-4 shadow-md hover:shadow-lg transition-shadow">
+            <% if book.cover.attached? %>
+              <div class="w-full h-48 overflow-hidden rounded-lg mb-4">
+                <%= image_tag book.cover, class: "w-full h-full object-cover" %>
+              </div>
+            <% else %>
+              <div class="w-full h-48 bg-gray-200 flex items-center justify-center rounded-lg mb-4">
+                <i class="fas fa-book text-gray-400 text-5xl"></i>
+              </div>
+            <% end %>
+
+            <h3 class="text-lg font-semibold text-gray-700">
+              <%= link_to book.title, book_path(book), class: "hover:text-blue-500 hover:underline" %>
+            </h3>
+
+
+            <div class="mt-2">
+              <h4 class="text-sm font-semibold text-gray-600">Authors:</h4>
+              <ul class="mt-1 space-y-1">
+                <% book.authors.each do |co_author| %>
+                  <li>
+                    <%= link_to co_author.display_name, author_path(co_author), class: "text-blue-500 hover:underline text-sm" %>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+
+            <!-- Categories for Each Book -->
+            <div class="mt-2 flex flex-wrap gap-2">
+              <% book.categories.each do |category| %>
+                <span class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm shadow">
+                  <%= category.name %>
+                </span>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="mt-4 text-gray-600">This author has not published any books yet.</p>
+    <% end %>
+  </div>
+
+  <% if Current.librarian.present? %>
+  <div class="mt-8">
+    <%= link_to "Bearbeiten", edit_author_path(@author), class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+  </div>
+  <% end %>
 </div>

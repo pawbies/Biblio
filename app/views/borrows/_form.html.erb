@@ -1,7 +1,7 @@
 <%= form_with(model: borrow, class: "contents") do |form| %>
   <% if borrow.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(borrow.errors.count, "error") %> prohibited this borrow from being saved:</h2>
+      <h2><%= borrow.errors.count %> Fehler haben das speichern verhindert:</h2>
 
       <ul>
         <% borrow.errors.each do |error| %>
@@ -20,16 +20,6 @@
     <%= form.label :return_date %>
     <%= form.date_field :return_date, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
-
-  <!--
-  <div class="my-5">
-  <%= form.label :librarian_id %>
-  <%= form.select :librarian_id, 
-                options_for_select(Librarian.all.map { |l| ["#{l.firstname} #{l.lastname}", l.id] }), 
-                { include_blank: "Select a librarian." }, 
-                class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full", 
-  </div>
-  -->
 
   <div class="my-5">
     <%= form.label :firstname %>

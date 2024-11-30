@@ -1,10 +1,15 @@
 class BorrowsController < ApplicationController
-  before_action :set_borrow, only: %i[ show edit finish update destroy ]
+  before_action :set_borrow, only: %i[ show edit finish update update_finish destroy ]
   before_action :require_librarian!
+  layout "admin"
 
   # GET /borrows or /borrows.json
   def index
-    @borrows = Borrow.all
+    @borrows = Borrow.all.where(returned: false).page(params[:page]).per(30)
+  end
+
+  def archive
+    @borrows = Borrow.all.where(returned: true).page(params[:page]).per(30)
   end
 
   # GET /borrows/1 or /borrows/1.json
@@ -26,11 +31,11 @@ class BorrowsController < ApplicationController
 
   # POST /borrows or /borrows.json
   def create
-    @borrow = Borrow.new(returned: false, librarian: Current.librarian, **borrow_params)
+    @borrow = Borrow.new(returned: false, rating: nil, librarian: Current.librarian, **borrow_params)
 
     respond_to do |format|
       if @borrow.save
-        format.html { redirect_to @borrow, notice: "Borrow was successfully created." }
+        format.html { redirect_to @borrow, notice: "Ausleihe wurde erfolgreich erstellt." }
         format.json { render :show, status: :created, location: @borrow }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -43,10 +48,22 @@ class BorrowsController < ApplicationController
   def update
     respond_to do |format|
       if @borrow.update(borrow_params)
-        format.html { redirect_to @borrow, notice: "Borrow was successfully updated." }
+        format.html { redirect_to @borrow, notice: "Ausleihe wurde erfolgreich aktualisiert." }
         format.json { render :show, status: :ok, location: @borrow }
       else
         format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @borrow.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update_finish
+    respond_to do |format|
+      if @borrow.update(borrow_params)
+        format.html { redirect_to @borrow, notice: "Ausleihe wurde erfolgreich abgeschlosen." }
+        format.json { render :show, status: :ok, location: @borrow }
+      else
+        format.html { render :finish, status: :unprocessable_entity }
         format.json { render json: @borrow.errors, status: :unprocessable_entity }
       end
     end
@@ -57,7 +74,7 @@ class BorrowsController < ApplicationController
     @borrow.destroy!
 
     respond_to do |format|
-      format.html { redirect_to borrows_path, status: :see_other, notice: "Borrow was successfully destroyed." }
+      format.html { redirect_to archive_path, status: :see_other, notice: "Ausleihe wurde erfolgreich gelöscht." }
       format.json { head :no_content }
     end
   end
@@ -70,6 +87,6 @@ class BorrowsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def borrow_params
-      params.require(:borrow).permit(:borrow_date, :return_date, :actual_return_date, :returned, :librarian_id, :firstname, :lastname, :phone, :email, book_ids: [])
+      params.require(:borrow).permit(:borrow_date, :return_date, :actual_return_date, :rating, :returned, :librarian_id, :firstname, :lastname, :phone, :email, book_ids: [])
     end
 end

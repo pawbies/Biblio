@@ -1,10 +1,11 @@
 class BooksController < ApplicationController
   before_action :set_book, only: %i[ show edit update destroy ]
-  before_action :require_librarian!, except: %i[ index show ]
+  before_action :require_librarian!, except: %i[ show ]
+  layout "admin", except: %i[ show ]
 
   # GET /books or /books.json
   def index
-    @books = Book.all
+    @books = Book.all.page(params[:page]).per(30)
   end
 
   # GET /books/1 or /books/1.json
@@ -26,7 +27,7 @@ class BooksController < ApplicationController
 
     respond_to do |format|
       if @book.save
-        format.html { redirect_to @book, notice: "Book was successfully created." }
+        format.html { redirect_to @book, notice: "Buch wurde erfolgreich erstellt." }
         format.json { render :show, status: :created, location: @book }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +40,7 @@ class BooksController < ApplicationController
   def update
     respond_to do |format|
       if @book.update(book_params)
-        format.html { redirect_to @book, notice: "Book was successfully updated." }
+        format.html { redirect_to @book, notice: "Buch wurde erfolgreich aktualisiert." }
         format.json { render :show, status: :ok, location: @book }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,7 +54,7 @@ class BooksController < ApplicationController
     @book.destroy!
 
     respond_to do |format|
-      format.html { redirect_to books_path, status: :see_other, notice: "Book was successfully destroyed." }
+      format.html { redirect_to books_path, status: :see_other, notice: "Buch wurde erfolgreich gelöscht." }
       format.json { head :no_content }
     end
   end
@@ -66,6 +67,6 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:title, :description, :isbn, :price, :publisher_id, :amount, category_ids: [], author_ids: [])
+      params.require(:book).permit(:title, :description, :isbn, :price, :publisher_id, :amount, :cover, category_ids: [], author_ids: [])
     end
 end

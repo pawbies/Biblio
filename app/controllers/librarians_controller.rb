@@ -1,10 +1,11 @@
 class LibrariansController < ApplicationController
   before_action :set_librarian, only: %i[ show edit update destroy ]
   before_action :require_librarian!
+  layout "admin"
 
   # GET /librarians or /librarians.json
   def index
-    @librarians = Librarian.all
+    @librarians = Librarian.all.page(params[:page]).per(30)
   end
 
   # GET /librarians/1 or /librarians/1.json
@@ -26,7 +27,7 @@ class LibrariansController < ApplicationController
 
     respond_to do |format|
       if @librarian.save
-        format.html { redirect_to @librarian, notice: "Librarian was successfully created." }
+        format.html { redirect_to @librarian, notice: "Bibliothekar wurde erfolgreich gelöscht." }
         format.json { render :show, status: :created, location: @librarian }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -39,7 +40,7 @@ class LibrariansController < ApplicationController
   def update
     respond_to do |format|
       if @librarian.update(librarian_params)
-        format.html { redirect_to @librarian, notice: "Librarian was successfully updated." }
+        format.html { redirect_to @librarian, notice: "Bibliothekar wurde erfolgreich aktualisiert." }
         format.json { render :show, status: :ok, location: @librarian }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -53,7 +54,7 @@ class LibrariansController < ApplicationController
     @librarian.destroy!
 
     respond_to do |format|
-      format.html { redirect_to librarians_path, status: :see_other, notice: "Librarian was successfully destroyed." }
+      format.html { redirect_to librarians_path, status: :see_other, notice: "Bibliothekar wurde erfolgreich gelöscht." }
       format.json { head :no_content }
     end
   end

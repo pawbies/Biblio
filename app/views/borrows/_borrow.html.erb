@@ -15,8 +15,22 @@
   </p>
 
   <p class="my-5">
+    <strong class="block font-medium mb-1">Bücher:</strong>
+    <ul>
+    <% borrow.books.each do |book| %>
+      <li><%= link_to book.title, book_path(book) %></li>
+    <% end %>
+    </ul>
+  </p>
+
+  <p class="my-5">
     <strong class="block font-medium mb-1">Zurückgebracht:</strong>
     <%= borrow.returned ? "Ja" : "Nein" %>
+  </p>
+
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Bewertung:</strong>
+    <%= borrow.rating %>
   </p>
 
   <p class="my-5">

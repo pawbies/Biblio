@@ -1,7 +1,7 @@
 <%= form_with(model: publisher, class: "contents") do |form| %>
   <% if publisher.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(publisher.errors.count, "error") %> prohibited this publisher from being saved:</h2>
+      <h2><%= publisher.errors.count %> Fehler haben das speichern verhindert:</h2>
 
       <ul>
         <% publisher.errors.each do |error| %>

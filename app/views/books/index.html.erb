@@ -1,21 +1,49 @@
 <div class="w-full">
-  <% if notice.present? %>
-    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
-  <% end %>
+ 
 
   <% content_for :title, "Books" %>
 
-  <div class="flex justify-between items-center">
+  <div class="flex justify-between items-center mb-3">
     <h1 class="font-bold text-4xl">Bücher</h1>
     <%= link_to "Neues Buch", new_book_path, class: "rounded-lg py-3 px-5 bg-blue-600 text-white block font-medium" %>
   </div>
 
-  <div id="books" class="min-w-full">
-    <% @books.each do |book| %>
-      <%= render book %>
-      <p>
-        <%= link_to "Dieses Buch anzeigen", book, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-      </p>
-    <% end %>
-  </div>
+  <table class="min-w-full divide-y divide-gray-200 table-fixed">
+    <thead class="bg-gray-100">
+      <tr>
+        <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+          Titel
+        </th>
+        <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+          Autor
+        </th>
+        <th scope="col" class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+          Anzahl
+        </th>
+        <th class="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase">
+          Aktionen
+        </th>
+      <tr>
+    </thead>
+    <tbody class="bg-gray divide-y divide-gray-200">
+      <% @books.each do |book| %>
+        <tr class="hover:bg-gray-100">
+          <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"><%= book.title %></td>
+          <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap">
+            <% book.authors.each do |author| %>
+              <%= link_to author.display_name, author %>
+            <% end %>
+          </td>
+          <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"><%= book.effective_amount == book.amount ? book.amount : "#{ book.effective_amount } / #{ book.amount }" %></td>
+          <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap flex">
+            <%= link_to "Ansehen", book, class: "py-4 px-2 text-sm font-medium text-green-500 whitespace-nowrap" %>
+            <%= link_to "Bearbeiten", edit_book_path(book), class: "py-4 px-2 text-sm font-medium text-blue-500 whitespace-nowrap" %>
+            <%= button_to "Löschen", book_path(book), method: :delete, class: "py-4 px-2 text-sm font-medium text-red-500 whitespace-nowrap" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <%= paginate @books %>
 </div>

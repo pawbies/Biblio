@@ -1,7 +1,7 @@
 <%= form_with(model: librarian, class: "contents") do |form| %>
   <% if librarian.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(librarian.errors.count, "error") %> prohibited this librarian from being saved:</h2>
+      <h2><%= librarian.errors.count %> Fehler haben das speichern verhindert:</h2>
 
       <ul>
         <% librarian.errors.each do |error| %>

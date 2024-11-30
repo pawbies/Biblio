@@ -24,6 +24,14 @@
     <%= book.publisher.name %>
   </p>
 
+  
+  <p class="my-5">
+    <strong class="block font-medium mb-1">Deckblatt:</strong>
+    <% if book.cover.attached? %>
+      <%= image_tag book.cover %>
+    <% end %>
+  </p>
+
   <p class="my-5">
     <strong class="block font-medium mb-1">Kategorien:</strong>
     <ul>

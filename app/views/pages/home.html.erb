@@ -1,1 +1,92 @@
-<h1>Willkommen zu Biblio</h1>
+<div class="container mx-auto mb-10 px-5">
+
+  <section>
+    <h1 class="text-3xl font-bold mb-6 text-gray-800">Empfohlene Bücher</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+      <% @books.each do |book| %>
+      <div class="bg-white shadow rounded overflow-hidden">
+
+        <!-- Cover Section -->
+        <div class="h-64 bg-gray-200 flex items-center justify-center">
+          <% if book.cover.attached? %>
+            <%= image_tag book.cover, class: "w-full h-full object-fill" %>
+          <% else %>
+            <i class="fas fa-book text-gray-500 text-6xl"></i>
+          <% end %>
+        </div>
+
+        <!-- Book Details -->
+        <div class="p-4">
+          <h2 class="text-lg font-semibold text-gray-800 truncate"><%= book.title %></h2>
+
+          <!-- Authors -->
+          <p class="text-gray-600 mt-2">
+            Von: 
+            <%= book.authors.map { |author| link_to author.display_name, author_path(author) }.join(", ").html_safe %>
+          </p>
+
+          <!-- Rating Section -->
+          <div class="mt-2 flex items-center">
+            <% if book.average_rating.present? %>
+              <% average = book.average_rating.round %>
+              <% 5.times do |i| %>
+                <% if i < average %>
+                  <i class="fas fa-star text-yellow-400"></i>
+                <% else %>
+                  <i class="far fa-star text-gray-300"></i>
+                <% end %>
+              <% end %>
+              <span class="ml-2 text-sm text-gray-600"><%= book.average_rating.round(1) %>/5</span>
+            <% else %>
+              <span class="text-sm text-gray-500">Keine Bewertungen</span>
+            <% end %>
+          </div>
+
+          <!-- Description -->
+          <p class="text-gray-500 mt-2 text-sm"><%= truncate(book.description, length: 100) %></p>
+
+          <!-- More Link -->
+          <div class="mt-4">
+            <a href="<%= book_path(book) %>" class="text-blue-500 hover:underline text-sm flex items-center">
+              <i class="fas fa-book-open mr-2"></i> Mehr
+            </a>
+          </div>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </section>
+
+  <section class="mt-16">
+    <h1 class="text-3xl font-bold mb-6 text-gray-800">Beliebte Authoren</h1>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      <% @authors.each do |author| %>
+      <div class="bg-white shadow rounded overflow-hidden text-center p-4">
+
+        <!-- Profile Picture -->
+        <div class="h-24 w-24 bg-gray-200 rounded-full mx-auto flex items-center justify-center mb-4">
+          <% if author.pfp.attached? %>
+            <%= image_tag author.pfp, class: "rounded-full w-full h-full object-fill" %>
+          <% else %>
+            <i class="fas fa-user text-gray-500 text-3xl"></i>
+          <% end %>
+        </div>
+
+        <!-- Author Details -->
+        <h3 class="text-lg font-semibold text-gray-800"><%= author.display_name %></h3>
+        <p class="text-gray-500 mt-2 text-sm"><%= truncate(author.bio, length: 100) %></p>
+
+        <!-- Profile Link -->
+        <div class="mt-4">
+          <a href="<%= author_path(author) %>" class="text-blue-500 hover:underline text-sm flex items-center justify-center">
+            <i class="fas fa-user mr-2"></i> Profil ansehen
+          </a>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </section>
+
+</div>

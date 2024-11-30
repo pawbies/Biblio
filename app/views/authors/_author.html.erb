@@ -15,6 +15,13 @@
   </p>
 
   <p class="my-5">
+    <strong class="block font-medium mb-1">Profilbild:</strong>
+    <% if author.pfp.attached? %>
+      <%= image_tag author.pfp %>
+    <% end %>
+  </p>
+
+  <p class="my-5">
     <strong class="block font-medium mb-1">Bio:</strong>
     <%= author.bio %>
   </p>

@@ -1,10 +1,10 @@
 <div class="mx-auto md:w-2/3 w-full">
   <h1 class="font-bold text-4xl">Ausleihe Abschließen</h1>
 
-  <%= form_with(model: @borrow, class: "contents") do |form| %>
+  <%= form_with(model: @borrow, url: update_finish_path, class: "contents") do |form| %>
     <% if @borrow.errors.any? %>
         <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-        <h2><%= pluralize(@borrow.errors.count, "error") %> prohibited this borrow from being saved:</h2>
+        <h2><%= @borrow.errors.count %> Fehler haben das speichern verhindert:</h2>
 
         <ul>
             <% @borrow.errors.each do |error| %>
@@ -16,7 +16,12 @@
 
     <div class="my-5">
         <%= form.label :actual_return_date %>
-        <%= form.date_field :actual_return_date, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+        <%= form.date_field :actual_return_date, value: Date.today, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    </div>
+
+      <div class="my-5">
+        <%= form.label :rating %>
+        <%= form.number_field :rating, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
     </div>
 
     <div class="inline">

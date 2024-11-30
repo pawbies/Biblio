@@ -1,5 +1,6 @@
 class Librarian < ApplicationRecord
   has_secure_password
+  has_many :borrows
 
   validates :firstname, presence: true, length: { maximum: 30 }
   validates :lastname, presence: true, length: { maximum: 30 }

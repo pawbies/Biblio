@@ -51,6 +51,44 @@ de:
       in_list: " ist nicht in der Liste der erlaubten Werte enthalten."
       not_in_list: " ist in der Liste der verbotenen Werte enthalten."
       required: " wird benötigt."
+      too_short_password: " ist zu kurz. Es muss mindestens %{count} Zeichen haben."
+      too_weak_password: " ist zu schwach. Bitte verwenden Sie eine Kombination aus Großbuchstaben, Zahlen und Symbolen."
+      unique: " muss einzigartig sein."
+      email_invalid: " muss eine gültige Email-Adresse sein."
+      less_than_or_equal_to_date: " muss ein Datum vor oder gleich %{date} sein."
+      greater_than_or_equal_to_date: " muss ein Datum nach oder gleich %{date} sein."
+      invalid_date: " ist kein gültiges Datum."
+      invalid_time: " ist keine gültige Zeit."
+      invalid_datetime: " ist kein gültiges Datum oder Uhrzeit."
+      invalid_character: " enthält ungültige Zeichen."
+      file_too_large: " ist zu groß. Die maximale Größe beträgt %{size} MB."
+      file_invalid_format: " hat ein ungültiges Dateiformat. Erlaubt sind: %{formats}."
+      url_invalid: " muss eine gültige URL sein."
+      phone_invalid: " muss eine gültige Telefonnummer sein."
+      alpha: " darf nur Buchstaben enthalten."
+      alphanumeric: " darf nur Buchstaben und Zahlen enthalten."
+      numeric: " darf nur Zahlen enthalten."
+      must_be_true: " muss wahr sein."
+      must_be_false: " muss falsch sein."
+      disallowed: " ist nicht erlaubt."
+      password_mismatch: " und die Passwortbestätigung stimmen nicht überein."
+      exceeded_maximum: " überschreitet das zulässige Maximum von %{count}."
+      below_minimum: " liegt unter dem erforderlichen Minimum von %{count}."
+      excluded: " ist ausgeschlossen."
+      not_confirmed: " wurde nicht bestätigt."
+      unprocessable: " kann nicht verarbeitet werden."
+      unauthorized: " ist nicht autorisiert."
+      forbidden: " ist nicht erlaubt."
+      timeout: " hat ein Zeitlimit überschritten."
+      invalid_association: " ist keine gültige Zuordnung."
+      already_exists: " existiert bereits."
+      does_not_exist: " existiert nicht."
+      locked: " ist gesperrt."
+      expired: " ist abgelaufen."
+      invalid_credentials: " sind ungültig."
+      not_found: " wurde nicht gefunden."
+      unsupported: " wird nicht unterstützt."
+      inclusion: " ist kein valider Wert."
 
 
   activerecord:
@@ -75,6 +113,7 @@ de:
         book_ids: "Bücher"
         books: "Bücher"
         returned: "Zurückgebracht"
+        rating: "Bewertung"
 
       librarian:
         firstname: "Vorname"
@@ -88,6 +127,7 @@ de:
         lastname: "Nachname"
         artistname: "Künstlername"
         bio: "Biographie"
+        pfp: "Profilbild"
 
       book:
         title: "Titel"
@@ -99,6 +139,7 @@ de:
         amount: "Anzahl"
         author_ids: "Autoren"
         authors: "Autoren"
+        cover: "Deckblatt"
 
       category:
         name: "Name"

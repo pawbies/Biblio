@@ -1,11 +1,14 @@
 Rails.application.routes.draw do
   get "borrows/:id/finish" => "borrows#finish", as: :finish_borrow
+  patch "borrows/:id/finish" => "borrows#update_finish", as: :update_finish
   resources :borrows
   resources :books
   resources :publishers
   resources :authors
   resources :categories
   resources :librarians
+
+  get "archive" => "borrows#archive", as: :archive
 
   get "up" => "rails/health#show", as: :rails_health_check
 
@@ -15,8 +18,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "pages#home"
+  get "search" => "pages#search", as: :search
 
   get "login" => "sessions#login"
-  post "logout" => "sessions#logout"
+  get "logout" => "sessions#logout"
   post "login-verify" => "sessions#login_verify"
 end

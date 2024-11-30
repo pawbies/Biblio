@@ -1,15 +1,62 @@
-<div class="mx-auto md:w-2/3 w-full flex">
-  <div class="mx-auto">
-    <% if notice.present? %>
-      <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-lg inline-block" id="notice"><%= notice %></p>
+<div class="max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+  <!-- Book Details -->
+  <div class="flex gap-6">
+    <% if @book.cover.attached? %>
+      <div class="w-64 h-64 overflow-hidden rounded-lg shadow-md">
+        <%= image_tag @book.cover, class: "w-full h-full object-cover" %>
+      </div>
+    <% else %>
+      <div class="w-64 h-64 bg-gray-200 flex items-center justify-center rounded-lg shadow-md">
+        <i class="fas fa-book text-gray-400 text-6xl"></i>
+      </div>
     <% end %>
 
-    <%= render @book %>
+    <div>
+      <h1 class="text-2xl font-bold text-gray-800"><%= @book.title %></h1>
 
-    <%= link_to "Dieses Buch bearbeiten", edit_book_path(@book), class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <%= link_to "Zurück zu Büchern", books_path, class: "ml-2 rounded-lg py-3 px-5 bg-gray-100 inline-block font-medium" %>
-    <div class="inline-block ml-2">
-      <%= button_to "Dieses Buch löschen", @book, method: :delete, class: "mt-2 rounded-lg py-3 px-5 bg-gray-100 font-medium" %>
+      <!-- Authors Section -->
+      <div class="mt-4">
+        <h2 class="text-xl font-semibold text-gray-700">Autoren</h2>
+        <% if @book.authors.any? %>
+          <ul class="mt-2 space-y-1">
+            <% @book.authors.each do |author| %>
+              <li>
+                <%= link_to author.display_name, author_path(author), class: "text-blue-500 hover:underline" %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p class="text-gray-500 mt-2">Keine Autoren zugewiesen.</p>
+        <% end %>
+      </div>
+
+      <div class="mt-4">
+        <h2 class="text-xl font-semibold text-gray-700">Kategorien</h2>
+        <% if @book.categories.any? %>
+          <ul class="mt-2 flex flex-wrap gap-2">
+            <% @book.categories.each do |category| %>
+              <li class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm shadow">
+                <%= category.name %>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p class="text-gray-500 mt-2">Zu keinen Kategorien hinzugefügt.</p>
+        <% end %>
+      </div>
     </div>
   </div>
+
+  <div class="mt-8">
+    <h2 class="text-xl font-bold text-gray-800">Beschreibung</h2>
+    <p class="mt-2 text-gray-600">
+      <%= @book.description.presence || "No description available for this book." %>
+    </p>
+  </div>
+
+  <% if Current.librarian.present? %>
+  <div class="mt-8">
+    <%= link_to "Bearbeiten", edit_book_path(@book), class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+  </div>
+  <% end %>
 </div>

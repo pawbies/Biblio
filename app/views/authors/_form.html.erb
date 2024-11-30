@@ -1,7 +1,7 @@
 <%= form_with(model: author, class: "contents") do |form| %>
   <% if author.errors.any? %>
     <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-lg mt-3">
-      <h2><%= pluralize(author.errors.count, "error") %> prohibited this author from being saved:</h2>
+      <h2><%= author.errors.count %> Fehler haben das speichern verhindert:</h2>
 
       <ul>
         <% author.errors.each do |error| %>
@@ -24,6 +24,12 @@
   <div class="my-5">
     <%= form.label :artistname %>
     <%= form.text_field :artistname, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :pfp %>
+    <%= form.hidden_field :pfp, value: author.pfp.signed_id if author.pfp.attached? %>
+    <%= form.file_field :pfp, direct_upload: true %>
   </div>
 
   <div class="my-5">

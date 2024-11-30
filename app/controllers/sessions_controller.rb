@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
       redirect_to root_path, notice: "Erfolgreich als #{@librarian.firstname} #{@librarian.lastname} eingelogt"
     else
       flash.now[:alert] = "Falsche Email oder Passwort"
-      render :login, status: :unprocessable_entity, notice: "Wrong email or password"
+      render :login, status: :unprocessable_entity
     end
   end
 

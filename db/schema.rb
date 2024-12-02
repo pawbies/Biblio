@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_11_30_110132) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_01_104610) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -51,6 +51,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_30_110132) do
   create_table "authors_books", id: false, force: :cascade do |t|
     t.integer "book_id", null: false
     t.integer "author_id", null: false
+    t.index ["author_id", "book_id"], name: "index_authors_books_on_author_id_and_book_id"
+    t.index ["book_id", "author_id"], name: "index_authors_books_on_book_id_and_author_id"
   end
 
   create_table "books", force: :cascade do |t|
@@ -68,11 +70,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_30_110132) do
   create_table "books_borrows", id: false, force: :cascade do |t|
     t.integer "book_id", null: false
     t.integer "borrow_id", null: false
+    t.index ["book_id", "borrow_id"], name: "index_books_borrows_on_book_id_and_borrow_id"
+    t.index ["borrow_id", "book_id"], name: "index_books_borrows_on_borrow_id_and_book_id"
   end
 
   create_table "books_categories", id: false, force: :cascade do |t|
     t.integer "book_id", null: false
     t.integer "category_id", null: false
+    t.index ["book_id", "category_id"], name: "index_books_categories_on_book_id_and_category_id"
+    t.index ["category_id", "book_id"], name: "index_books_categories_on_category_id_and_book_id"
   end
 
   create_table "borrows", force: :cascade do |t|
@@ -87,7 +93,6 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_30_110132) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "rating"
     t.index ["librarian_id"], name: "index_borrows_on_librarian_id"
   end
 
@@ -115,8 +120,22 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_30_110132) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.text "message"
+    t.integer "rating"
+    t.integer "book_id", null: false
+    t.integer "borrow_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "anonymous", null: false
+    t.index ["book_id"], name: "index_reviews_on_book_id"
+    t.index ["borrow_id"], name: "index_reviews_on_borrow_id"
+  end
+
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "books", "publishers"
   add_foreign_key "borrows", "librarians"
+  add_foreign_key "reviews", "books"
+  add_foreign_key "reviews", "borrows"
 end

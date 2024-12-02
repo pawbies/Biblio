@@ -2,6 +2,7 @@ class Book < ApplicationRecord
   has_and_belongs_to_many :authors
   has_and_belongs_to_many :borrows
   has_and_belongs_to_many :categories
+  has_many :reviews, dependent: :destroy
   belongs_to :publisher
 
   paginates_per 6
@@ -13,11 +14,11 @@ class Book < ApplicationRecord
   validates :publisher, presence: true
 
   def effective_amount
-    amount - borrows.count
+    amount - borrows.where(returned: false).count
   end
 
   def average_rating
-    return nil if borrows.where.not(rating: nil).empty?
-    borrows.where.not(rating: nil).average(:rating).to_f
+    return nil if reviews.empty?
+    reviews.average(:rating).to_f
   end
 end

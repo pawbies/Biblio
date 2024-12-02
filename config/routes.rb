@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get "borrows/:id/reviews" => "borrows#reviews", as: :reviews
+  post "borrows/:id/reviews" => "borrows#create_reviews", as: :create_reviews
   get "borrows/:id/finish" => "borrows#finish", as: :finish_borrow
   patch "borrows/:id/finish" => "borrows#update_finish", as: :update_finish
   resources :borrows

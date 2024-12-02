@@ -1,0 +1,37 @@
+<div class="mx-auto md:w-2/3 w-full">
+  <h1 class="font-bold text-4xl">Ausleihe Abschließen</h1>
+  <%= form_with url: create_reviews_path(@borrow), method: :post do |form| %>
+    <div class="my-5">
+      <% @borrow.books.each do |book| %>
+        <div class="border p-4 rounded mb-4" data-controller="review-fields">
+          <h3 class="font-bold text-lg"><%= book.title %></h3>
+          <div class="my-2 flex items-center">
+            <%= form.check_box "reviews[#{book.id}][enabled]", 
+              { class: "mr-2", data: { action: "change->review-fields#toggle", review_fields_target: "checkbox" } }, 
+              true, 
+              false 
+            %>
+            <%= form.label "reviews[#{book.id}][enabled]", "Bewertung für dieses Buch hinzufügen" %>
+          </div>
+          <div class="review-fields hidden" data-review-fields-target="fields">
+            <div class="my-2 flex items-center">
+              <%= form.check_box "reviews[#{book.id}][anonymous]", { class: "mr-2" }, true, false %>
+              <%= form.label "reviews[#{book.id}][anonymous]", "Bewertung anonym veröffentlichen?" %>
+            </div>
+            <div class="my-2">
+              <%= form.label "reviews[#{book.id}][rating]", "Sterne (1-5)" %>
+              <%= form.select "reviews[#{book.id}][rating]", options_for_select([1, 2, 3, 4, 5]), {}, class: "w-full px-3 py-2 border rounded-md" %>
+            </div>
+            <div class="my-2">
+              <%= form.label "reviews[#{book.id}][message]", "Review" %>
+              <%= form.text_area "reviews[#{book.id}][message]", class: "w-full px-3 py-2 border rounded-md", rows: 4 %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="my-5">
+      <%= form.submit "Abschließen", class: "px-4 py-2 bg-blue-500 text-white rounded-md" %>
+    </div>
+  <% end %>
+</div>

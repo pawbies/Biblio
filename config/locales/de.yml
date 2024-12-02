@@ -89,6 +89,7 @@ de:
       not_found: " wurde nicht gefunden."
       unsupported: " wird nicht unterstützt."
       inclusion: " ist kein valider Wert."
+      record_invalid: "Eintrag invalide."
 
 
   activerecord:
@@ -135,6 +136,7 @@ de:
         isbn: "ISBN"
         price: "Preis"
         publisher_id: "Verlag"
+        category_ids: "Kategorien"
         publisher: "Verlag"
         amount: "Anzahl"
         author_ids: "Autoren"

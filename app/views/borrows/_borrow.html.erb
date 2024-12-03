@@ -30,7 +30,11 @@
 
   <p class="my-5">
     <strong class="block font-medium mb-1">Bibliothekar:</strong>
-    <%= "#{borrow.librarian.firstname} #{borrow.librarian.lastname}" %>
+    <% if borrow.librarian.present? %>
+      <%= "#{borrow.librarian.firstname} #{borrow.librarian.lastname}" %>
+    <% else %>
+      Keinem Bibliothekar zugewiesen
+    <% end %>
   </p>
 
   <p class="my-5">

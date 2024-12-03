@@ -40,10 +40,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_01_104610) do
   end
 
   create_table "authors", force: :cascade do |t|
-    t.string "firstname"
-    t.string "lastname"
-    t.string "artistname"
-    t.text "bio"
+    t.string "firstname", limit: 50
+    t.string "lastname", limit: 50
+    t.string "artistname", limit: 50
+    t.text "bio", limit: 500
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -56,12 +56,12 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_01_104610) do
   end
 
   create_table "books", force: :cascade do |t|
-    t.string "title"
-    t.text "description"
-    t.string "isbn"
+    t.string "title", limit: 60, null: false
+    t.text "description", limit: 300
+    t.string "isbn", limit: 30
     t.float "price"
     t.integer "publisher_id", null: false
-    t.integer "amount"
+    t.integer "amount", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["publisher_id"], name: "index_books_on_publisher_id"
@@ -86,7 +86,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_01_104610) do
     t.date "return_date"
     t.date "actual_return_date"
     t.boolean "returned"
-    t.integer "librarian_id", null: false
+    t.integer "librarian_id"
     t.string "firstname"
     t.string "lastname"
     t.string "phone"
@@ -97,23 +97,23 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_01_104610) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
+    t.string "name", limit: 30, null: false
+    t.text "description", limit: 100
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "librarians", force: :cascade do |t|
-    t.string "firstname"
-    t.string "lastname"
-    t.string "email"
+    t.string "firstname", limit: 30, null: false
+    t.string "lastname", limit: 30, null: false
+    t.string "email", null: false
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "publishers", force: :cascade do |t|
-    t.string "name"
+    t.string "name", limit: 50, null: false
     t.string "email"
     t.string "url"
     t.datetime "created_at", null: false
@@ -121,8 +121,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_01_104610) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.text "message"
-    t.integer "rating"
+    t.text "message", limit: 300
+    t.integer "rating", null: false
     t.integer "book_id", null: false
     t.integer "borrow_id", null: false
     t.datetime "created_at", null: false

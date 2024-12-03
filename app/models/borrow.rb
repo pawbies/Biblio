@@ -1,6 +1,6 @@
 class Borrow < ApplicationRecord
   has_and_belongs_to_many :books
-  belongs_to :librarian, dependent: :destroy
+  belongs_to :librarian, optional: true
   has_many :reviews, dependent: :destroy
 
   validates :borrow_date, presence: true

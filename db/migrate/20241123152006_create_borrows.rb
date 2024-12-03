@@ -5,7 +5,7 @@ class CreateBorrows < ActiveRecord::Migration[7.2]
       t.date :return_date
       t.date :actual_return_date
       t.boolean :returned
-      t.references :librarian, null: false, foreign_key: true
+      t.references :librarian, null: true, foreign_key: true # dont delete borrow with librarian
       t.string :firstname
       t.string :lastname
       t.string :phone

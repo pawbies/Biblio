@@ -2,7 +2,6 @@
   <section>
     <h1 class="text-3xl font-bold text-gray-800 mb-6">Suche</h1>
 
-    <!-- Search Form -->
     <form method="get" action="<%= search_path %>" class="mb-10">
       <div class="flex items-center space-x-4">
         <input
@@ -22,13 +21,11 @@
     </form>
 
     <% if @query.present? %>
-    <!-- Search Results -->
     <section>
       <h2 class="text-2xl font-semibold text-gray-800 mb-4">
         Ergebnisse für "<%= @query %>"
       </h2>
 
-      <!-- Books -->
       <% if @books.any? %>
       <div class="mb-8">
         <h3 class="text-xl font-bold text-gray-700 mb-3">Bücher</h3>
@@ -52,10 +49,7 @@
                 <%= book.authors.map(&:display_name).join(", ") %>
               </p>
               <div class="mt-4">
-                <a
-                  href="<%= book_path(book) %>"
-                  class="text-blue-500 hover:underline text-sm flex items-center"
-                >
+                <a href="<%= book_path(book) %>" class="text-blue-500 hover:underline text-sm flex items-center">
                   <i class="fas fa-book-open mr-2"></i> Mehr
                 </a>
               </div>
@@ -67,33 +61,31 @@
       </div>
       <% end %>
 
-      <!-- Authors -->
       <% if @authors.any? %>
       <div>
         <h3 class="text-xl font-bold text-gray-700 mb-3">Autoren</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
           <% @authors.each do |author| %>
-          <div class="bg-white shadow rounded overflow-hidden text-center p-4">
-            <div class="h-24 w-24 bg-gray-200 rounded-full mx-auto flex items-center justify-center mb-4">
-            <% if author.pfp.attached? %>
-              <%= image_tag author.pfp, class: "rounded-full w-full h-full object-fill" %>
-            <% else %>
-              <i class="fas fa-user text-gray-500 text-3xl"></i>
-            <% end %>
+            <div class="bg-white shadow rounded overflow-hidden text-center p-4">
+              <div class="h-24 w-24 bg-gray-200 rounded-full mx-auto flex items-center justify-center mb-4">
+              <% if author.pfp.attached? %>
+                <%= image_tag author.pfp, class: "rounded-full w-full h-full object-fill" %>
+              <% else %>
+                <i class="fas fa-user text-gray-500 text-3xl"></i>
+              <% end %>
+              </div>
+              <h4 class="text-lg font-semibold text-gray-800">
+                <%= author.display_name %>
+              </h4>
+              <div class="mt-4">
+                <a href="<%= author_path(author) %>" class="text-blue-500 hover:underline text-sm flex items-center justify-center">
+                  <i class="fas fa-user mr-2"></i> Profil
+                </a>
+              </div>
             </div>
-            <h4 class="text-lg font-semibold text-gray-800">
-              <%= author.display_name %>
-            </h4>
-            <div class="mt-4">
-              <a
-                href="<%= author_path(author) %>"
-                class="text-blue-500 hover:underline text-sm flex items-center justify-center"
-              >
-                <i class="fas fa-user mr-2"></i> Profil
-              </a>
-            </div>
-          </div>
           <% end %>
+
           <%= paginate @authors, param_name: :author_page %>
         </div>
       </div>

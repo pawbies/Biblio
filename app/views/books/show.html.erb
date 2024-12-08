@@ -13,7 +13,6 @@
     <div>
       <h1 class="text-2xl font-bold text-gray-800"><%= @book.title %></h1>
 
-      <!-- Authors Section -->
       <div class="mt-4">
         <h2 class="text-xl font-semibold text-gray-700">Autoren</h2>
         <% if @book.authors.any? %>
@@ -72,7 +71,6 @@
 <div class="mt-10">
   <h2 class="text-2xl font-bold text-gray-800">Bewertungen</h2>
 
-  <!-- Single Review -->
   <div class="mt-6 space-y-6">
 
     <% @book.reviews.each do |review| %>

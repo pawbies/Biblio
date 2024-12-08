@@ -23,16 +23,13 @@
 
   <body class="bg-gray-100 text-gray-800">
 
-    <!-- Custom Navbar -->
     <nav class="bg-white shadow fixed top-0 w-full z-50">
       <div class="container mx-auto px-5 py-4 flex justify-between items-center">
-        <!-- Logo -->
         <a href="/" class="text-xl font-bold text-gray-800 flex items-center space-x-2">
           <i class="fas fa-book text-blue-500"></i>
           <span>Biblio</span>
         </a>
 
-        <!-- Navigation Links -->
         <div class="hidden md:flex space-x-6 items-center">
           <a href="<%= root_path %>" class="block px-2 py-3 text-gray-600 hover:bg-blue-50 hover:text-blue-500 transition">
             <i class="fas fa-home"></i> Home
@@ -54,13 +51,11 @@
           <% end %>
         </div>
 
-        <!-- Mobile Menu Button -->
         <button id="mobile-menu-button" class="md:hidden text-gray-600 hover:text-blue-500 focus:outline-none">
           <i class="fas fa-bars"></i>
         </button>
       </div>
 
-      <!-- Mobile Menu -->
       <div id="mobile-menu" class="hidden bg-gray-100">
         <a href="<%= root_path %>" class="block px-5 py-3 text-gray-600 hover:bg-blue-50 hover:text-blue-500 transition">
           <i class="fas fa-home"></i> Home
@@ -83,7 +78,6 @@
       </div>
     </nav>
 
-    <!-- Flash Messages -->
     <div class="container mx-auto mt-16 px-5">
       <% if flash[:notice].present? %>
       <div class="bg-blue-100 border border-blue-400 text-blue-700 px-4 py-3 rounded mb-4">
@@ -98,7 +92,6 @@
       <% end %>
     </div>
 
-    <!-- Main Content -->
     <main class="container mx-auto mt-28 px-5 flex">
       <%= yield %>
     </main>

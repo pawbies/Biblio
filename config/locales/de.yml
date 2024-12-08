@@ -139,6 +139,7 @@ de:
         category_ids: "Kategorien"
         publisher: "Verlag"
         amount: "Anzahl"
+        effective_amount: "Effektiv-Anzahl"
         author_ids: "Autoren"
         authors: "Autoren"
         cover: "Deckblatt"

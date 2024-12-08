@@ -7,7 +7,6 @@
       <% @books.each do |book| %>
       <div class="bg-white shadow rounded overflow-hidden">
 
-        <!-- Cover Section -->
         <div class="h-64 bg-gray-200 flex items-center justify-center">
           <% if book.cover.attached? %>
             <%= image_tag book.cover, class: "w-full h-full object-fill" %>
@@ -16,17 +15,14 @@
           <% end %>
         </div>
 
-        <!-- Book Details -->
         <div class="p-4">
           <h2 class="text-lg font-semibold text-gray-800 truncate"><%= book.title %></h2>
 
-          <!-- Authors -->
           <p class="text-gray-600 mt-2">
             Von: 
             <%= book.authors.map { |author| link_to author.display_name, author_path(author) }.join(", ").html_safe %>
           </p>
 
-          <!-- Rating Section -->
           <div class="mt-2 flex items-center">
             <% if book.average_rating.present? %>
               <% average = book.average_rating.round %>
@@ -43,10 +39,8 @@
             <% end %>
           </div>
 
-          <!-- Description -->
           <p class="text-gray-500 mt-2 text-sm"><%= truncate(book.description, length: 100) %></p>
 
-          <!-- More Link -->
           <div class="mt-4">
             <a href="<%= book_path(book) %>" class="text-blue-500 hover:underline text-sm flex items-center">
               <i class="fas fa-book-open mr-2"></i> Mehr
@@ -65,7 +59,6 @@
       <% @authors.each do |author| %>
       <div class="bg-white shadow rounded overflow-hidden text-center p-4">
 
-        <!-- Profile Picture -->
         <div class="h-24 w-24 bg-gray-200 rounded-full mx-auto flex items-center justify-center mb-4">
           <% if author.pfp.attached? %>
             <%= image_tag author.pfp, class: "rounded-full w-full h-full object-fill" %>
@@ -74,11 +67,10 @@
           <% end %>
         </div>
 
-        <!-- Author Details -->
+
         <h3 class="text-lg font-semibold text-gray-800"><%= author.display_name %></h3>
         <p class="text-gray-500 mt-2 text-sm"><%= truncate(author.bio, length: 100) %></p>
 
-        <!-- Profile Link -->
         <div class="mt-4">
           <a href="<%= author_path(author) %>" class="text-blue-500 hover:underline text-sm flex items-center justify-center">
             <i class="fas fa-user mr-2"></i> Profil ansehen

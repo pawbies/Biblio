@@ -1,29 +1,21 @@
-<div id="<%= dom_id author %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Vorname:</strong>
-    <%= author.firstname %>
-  </p>
+<div class="bg-white shadow rounded overflow-hidden text-center p-4">
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Nachname:</strong>
-    <%= author.lastname %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Künstlername:</strong>
-    <%= author.artistname %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Profilbild:</strong>
+  <div class="h-24 w-24 bg-gray-200 rounded-full mx-auto flex items-center justify-center mb-4">
     <% if author.pfp.attached? %>
-      <%= image_tag author.pfp %>
+      <%= image_tag author.pfp, class: "rounded-full w-full h-full object-fill" %>
+    <% else %>
+      <i class="fas fa-user text-gray-500 text-3xl"></i>
     <% end %>
-  </p>
+  </div>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Bio:</strong>
-    <%= author.bio %>
-  </p>
+
+  <h3 class="text-lg font-semibold text-gray-800"><%= author.display_name %></h3>
+  <p class="text-gray-500 mt-2 text-sm"><%= truncate(author.bio, length: 100) %></p>
+
+  <div class="mt-4">
+    <a href="<%= author_path(author) %>" class="text-blue-500 hover:underline text-sm flex items-center justify-center">
+      <i class="fas fa-user mr-2"></i> Profil ansehen
+    </a>
+  </div>
 
 </div>

@@ -50,8 +50,6 @@ class BorrowsController < ApplicationController
 
   # POST /borrows/1/reviews
   def create_reviews
-    puts params.inspect
-
     @books = @borrow.books
     @books.each do |book|
       review_params = params.dig(:reviews, book.id.to_s)

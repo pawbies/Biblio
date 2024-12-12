@@ -1,63 +1,53 @@
-<div id="<%= dom_id book %>">
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Titel:</strong>
-    <%= book.title %>
-  </p>
+<div>
+  <div class="bg-white shadow rounded overflow-hidden">
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Beschreibung:</strong>
-    <%= book.description %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Isbn:</strong>
-    <%= book.isbn %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Preis:</strong>
-    <%= book.price %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Verlag:</strong>
-    <%= book.publisher.name %>
-  </p>
-
-  
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Deckblatt:</strong>
-    <% if book.cover.attached? %>
-      <%= image_tag book.cover %>
-    <% end %>
-  </p>
-
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Kategorien:</strong>
-    <ul>
-      <% book.categories.each do |category| %>
-        <li><%= link_to category.name, category %></li>
+    <div class="h-64 bg-gray-200 relative flex items-center justify-center">
+      <% if book.cover.attached? %>
+        <%= image_tag book.cover, class: "w-full h-full object-fill" %>
+      <% else %>
+        <i class="fas fa-book text-gray-500 text-6xl"></i>
       <% end %>
-    </ul>
-  </p>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Autoren:</strong>
-    <ul>
-      <% book.authors.each do |author| %>
-        <li><%= link_to author.artistname, author %></li>
+      <% if book.effective_amount.zero? %>
+        <div class="absolute inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+          <span class="text-white text-xl font-bold transform rotate-45 whitespace-nowrap">
+            Nicht Verfügbar
+          </span>
+        </div>
       <% end %>
-    </ul>
-  </p>
+    </div>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Kopien:</strong>
-    <%= book.amount %>
-  </p>
+    <div class="p-4">
+      <h2 class="text-lg font-semibold text-gray-800 truncate"><%= book.title %></h2>
 
-  <p class="my-5">
-    <strong class="block font-medium mb-1">Verfügbare Kopien:</strong>
-    <%= book.effective_amount %>
-  </p>
+      <p class="text-gray-600 mt-2">
+        Von: 
+        <%= book.authors.map { |author| link_to author.display_name, author_path(author) }.join(", ").html_safe %>
+      </p>
 
+      <div class="mt-2 flex items-center">
+        <% if book.average_rating.present? %>
+          <% average = book.average_rating.round %>
+          <% 5.times do |i| %>
+            <% if i < average %>
+              <i class="fas fa-star text-yellow-400"></i>
+            <% else %>
+              <i class="far fa-star text-gray-300"></i>
+            <% end %>
+          <% end %>
+          <span class="ml-2 text-sm text-gray-600"><%= book.average_rating.round(1) %>/5</span>
+        <% else %>
+          <span class="text-sm text-gray-500">Keine Bewertungen</span>
+        <% end %>
+      </div>
+
+      <p class="text-gray-500 mt-2 text-sm"><%= truncate(book.description, length: 100) %></p>
+
+      <div class="mt-4">
+        <a href="<%= book_path(book) %>" class="text-blue-500 hover:underline text-sm flex items-center">
+          <i class="fas fa-book-open mr-2"></i> Mehr
+        </a>
+      </div>
+    </div>
+  </div>
 </div>

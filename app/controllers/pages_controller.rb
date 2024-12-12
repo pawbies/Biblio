@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def home
-    @books = Book.limit(9) # Fetch the top 9 books
-    @authors = Author.limit(8) # Fetch the top 8 authors
+    @books = Book.all.select { |book| book.effective_amount > 0 }.first(9)
+    @authors = Author.limit(8)
   end
 
   def search

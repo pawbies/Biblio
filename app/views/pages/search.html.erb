@@ -30,11 +30,13 @@
       <div class="mb-8">
         <h3 class="text-xl font-bold text-gray-700 mb-3">Bücher</h3>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
           <% @books.each do |book| %>
             <%= render book %>
           <% end %>
-          <%= paginate @books, param_name: :book_page %>
+
         </div>
+        <%= paginate @books, param_name: :book_page %>
       </div>
       <% end %>
 
@@ -44,33 +46,18 @@
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
 
           <% @authors.each do |author| %>
-            <div class="bg-white shadow rounded overflow-hidden text-center p-4">
-              <div class="h-24 w-24 bg-gray-200 rounded-full mx-auto flex items-center justify-center mb-4">
-              <% if author.pfp.attached? %>
-                <%= image_tag author.pfp, class: "rounded-full w-full h-full object-fill" %>
-              <% else %>
-                <i class="fas fa-user text-gray-500 text-3xl"></i>
-              <% end %>
-              </div>
-              <h4 class="text-lg font-semibold text-gray-800">
-                <%= author.display_name %>
-              </h4>
-              <div class="mt-4">
-                <a href="<%= author_path(author) %>" class="text-blue-500 hover:underline text-sm flex items-center justify-center">
-                  <i class="fas fa-user mr-2"></i> Profil
-                </a>
-              </div>
-            </div>
+            <%= render author %>
           <% end %>
 
-          <%= paginate @authors, param_name: :author_page %>
         </div>
+        <%= paginate @authors, param_name: :author_page %>
       </div>
       <% end %>
 
       <% if @books.empty? && @authors.empty? %>
-      <p class="text-gray-500 text-lg">No results found.</p>
+        <p class="text-gray-500 text-lg">No results found.</p>
       <% end %>
+
     </section>
     <% end %>
   </section>

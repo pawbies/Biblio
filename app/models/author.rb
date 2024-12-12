@@ -6,7 +6,7 @@ class Author < ApplicationRecord
   validates :artistname, length: { maximum: 50 }
   validates :bio, length: { maximum: 500 }
 
-  paginates_per 5
+  paginates_per 4
   has_one_attached :pfp
 
   def display_name

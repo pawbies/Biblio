@@ -14,6 +14,21 @@
       <h1 class="text-2xl font-bold text-gray-800"><%= @book.title %></h1>
 
       <div class="mt-4">
+        <h2 class="text-xl font-semibold text-gray-700">Verlag</h2>
+        <% if @book.publisher.present? %>
+          <p class="text-gray-600">
+            <% if @book.publisher.url.present? %>
+              <%= link_to @book.publisher.name, @book.publisher.url %>
+            <% else %>
+              <%= @book.publisher.name %>
+            <% end %>
+          </p>
+        <% else %>
+          <p class="text-gray-500">Kein Verlag angegeben.</p>
+        <% end %>
+      </div>
+
+      <div class="mt-4">
         <h2 class="text-xl font-semibold text-gray-700">Autoren</h2>
         <% if @book.authors.any? %>
           <ul class="mt-2 space-y-1">
@@ -76,54 +91,48 @@
     </p>
   </div>
 
-<div class="mt-10">
-  <h2 class="text-2xl font-bold text-gray-800">Bewertungen</h2>
+  <div class="mt-10">
+    <h2 class="text-2xl font-bold text-gray-800">Bewertungen</h2>
 
-  <div class="mt-6 space-y-6">
-
-    <% @book.reviews.each do |review| %>
-      <div class="border-b border-gray-200 pb-6">
-        <div class="flex items-center gap-4">
-          
-          <div class="flex">
-            <% review.rating.times do %>
-              <i class="fas fa-star text-yellow-400"></i>
-            <% end %>
-            <% (5-review.rating).times do %>
-              <i class="fas fa-star text-gray-400"></i>
-            <% end %>
+    <div class="mt-6 space-y-6">
+      <% @book.reviews.each do |review| %>
+        <div class="border-b border-gray-200 pb-6">
+          <div class="flex items-center gap-4">
+            <div class="flex">
+              <% review.rating.times do %>
+                <i class="fas fa-star text-yellow-400"></i>
+              <% end %>
+              <% (5 - review.rating).times do %>
+                <i class="fas fa-star text-gray-400"></i>
+              <% end %>
+            </div>
+            <span class="text-sm font-medium text-gray-700">
+              <% if review.anonymous %>
+                Anonym
+              <% else %>
+                <%= "#{review.borrow.firstname} #{review.borrow.lastname}" %>
+              <% end %>
+            </span>
           </div>
-
-          
-          <span class="text-sm font-medium text-gray-700">
-            <% if review.anonymous %>
-              Anonym
-            <% else %>
-              <%= "#{review.borrow.firstname} #{review.borrow.lastname}" %>
-            <% end %>
-          </span>
+          <% unless review.message.empty? || review.message.nil? %>
+            <p class="mt-3 text-gray-600">
+              <%= review.message %>
+            </p>
+          <% end %>
         </div>
-        <% unless review.message.empty? || review.message.nil? %>
-        <p class="mt-3 text-gray-600">
-          <%= review.message %>
-        </p>
-        <% end %>
+      <% end %>
+    </div>
+
+    <% if @book.reviews.empty? %>
+      <div class="mt-6 text-gray-500">
+        Es gibt noch keine Bewertungen für dieses Buch.
       </div>
     <% end %>
-
   </div>
-
-  <% if @book.reviews.empty? %>
-    <div class="mt-6 text-gray-500">
-      Es gibt noch keine Bewertungen für dieses Buch.
-    </div>
-  <% end %>
-</div>
-
 
   <% if Current.librarian.present? %>
-  <div class="mt-8">
-    <%= link_to "Bearbeiten", edit_book_path(@book), class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
-  </div>
+    <div class="mt-8">
+      <%= link_to "Bearbeiten", edit_book_path(@book), class: "px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" %>
+    </div>
   <% end %>
 </div>

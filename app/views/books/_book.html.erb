@@ -1,4 +1,4 @@
-<div>
+<div id="<%= dom_id book %>">
   <div class="bg-white shadow rounded overflow-hidden">
 
     <div class="h-64 bg-gray-200 relative flex items-center justify-center">
@@ -29,7 +29,7 @@
         <% if book.average_rating.present? %>
           <% average = book.average_rating.round %>
           <% 5.times do |i| %>
-            <% if i < average %>
+           <% if i < average %>
               <i class="fas fa-star text-yellow-400"></i>
             <% else %>
               <i class="far fa-star text-gray-300"></i>
@@ -41,7 +41,7 @@
         <% end %>
       </div>
 
-      <p class="text-gray-500 mt-2 text-sm"><%= truncate(book.description, length: 100) %></p>
+      <p class="text-gray-500 mt-2 text-sm h-[5em] overflow-y-scroll"><%= truncate(book.description, length: 100) %></p>
 
       <div class="mt-4">
         <a href="<%= book_path(book) %>" class="text-blue-500 hover:underline text-sm flex items-center">

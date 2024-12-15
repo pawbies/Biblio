@@ -9,7 +9,7 @@ class PagesController < ApplicationController
       @query = params[:query]
       @books =
         Book.joins(:authors, :categories).where(
-          "books.title LIKE :query OR authors.firstname LIKE :query OR authors.lastname LIKE :query OR authors.artistname LIKE :query OR categories.name LIKE :query",
+          "books.title LIKE :query OR books.isbn LIKE :query OR authors.firstname LIKE :query OR authors.lastname LIKE :query OR authors.artistname LIKE :query OR categories.name LIKE :query",
           query: "%#{@query}%"
         ).distinct.page(params[:book_page] || 1)
       @authors =

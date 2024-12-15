@@ -11,7 +11,7 @@ class Borrow < ApplicationRecord
   validates :phone, length: { maximum: 30 }
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
 
-  validate :book_amount_check, unless: :returned?
+  validate :book_amount_check, if: :new_record?
   validate :min_one_book
 
   private

@@ -13,7 +13,7 @@ class Book < ApplicationRecord
   validates :isbn, length: { maximum: 30 }
   validates :publisher, presence: true
   validates :amount, presence: true, inclusion: { in: 0..100 }
-  validate :positive_effective_amount
+  validate :positive_effective_amount, unless: :new_record?
 
   def effective_amount
     amount - borrows.where(returned: false).count

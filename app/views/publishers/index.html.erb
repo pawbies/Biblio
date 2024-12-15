@@ -29,8 +29,8 @@
       <% @publishers.each do |publisher| %>
         <tr class="hover:bg-gray-100">
           <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"><%= publisher.name %></td>
-          <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"><%= publisher.email %></td>
-          <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"><%= publisher.url %></td>
+          <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"><%= mail_to publisher.email, publisher.email, target: "_blank" %></td>
+          <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"><%= link_to publisher.url, publisher.url, target: "_blank" %></td>
           <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap flex">
             <%= link_to "Ansehen", publisher, class: "py-4 px-2 text-sm font-medium text-green-500 whitespace-nowrap" %>
             <%= link_to "Bearbeiten", edit_publisher_path(publisher), class: "py-4 px-2 text-sm font-medium text-blue-500 whitespace-nowrap" %>

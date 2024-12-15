@@ -33,6 +33,7 @@
 
   <div class="my-5">
     <%= form.label :phone %>
+    <small>(Optional)</small>
     <%= form.text_field :phone, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
@@ -41,22 +42,22 @@
     <%= form.text_field :email, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
-  <div class="my-5" data-controller="borrow-books-dropdown">
+  <div class="my-5" data-controller="dropdown">
     <%= form.label :book_ids %>
     
     <input 
       type="text" 
       placeholder="Suche..." 
-      data-borrow-books-dropdown-target="search" 
+      data-dropdown-target="search" 
       class="block w-full px-3 py-2 mb-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-gray-300"
-      data-action="input->borrow-books-dropdown#filter">
+      data-action="input->dropdown#filter">
     
-    <div 
+    <div
       class="block shadow rounded-md border border-gray-400 px-3 py-2 mt-2 w-full" 
-      data-borrow-books-dropdown-target="checkboxContainer" style="display: none">
+      data-dropdown-target="checkboxContainer" style="display: none">
       <% Book.all.each do |book| %>
         <div class="flex items-center my-2" style="display: none">
-          <%= check_box_tag "borrow[book_ids][]", book.id, false, class: "mr-2", data: { borrow_books_dropdown_target: "checkbox", action: "input->borrow-books-dropdown#filter" } %>
+          <%= check_box_tag "borrow[book_ids][]", book.id, borrow.book_ids.include?(book.id), class: "mr-2", data: { dropdown_target: "checkbox", action: "input->dropdown#filter" } %>
           <%= label_tag "book_ids_#{book.id}", book.title, class: "text-gray-700" %>
         </div>
       <% end %>

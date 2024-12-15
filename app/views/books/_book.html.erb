@@ -41,7 +41,7 @@
         <% end %>
       </div>
 
-      <p class="text-gray-500 mt-2 text-sm h-[5em] overflow-y-scroll"><%= truncate(book.description, length: 100) %></p>
+      <p class="text-gray-500 mt-2 text-sm h-[5em] overflow-y-hidden"><%= truncate(book.description, length: 100) %></p>
 
       <div class="mt-4">
         <a href="<%= book_path(book) %>" class="text-blue-500 hover:underline text-sm flex items-center">

@@ -40,7 +40,7 @@ class AuthorsController < ApplicationController
   def update
     respond_to do |format|
       if @author.update(author_params)
-        format.html { redirect_to @author, notice: "Author wurde erfolgreich aktualisiert." }
+        format.html { redirect_to @author, notice: "Autor wurde erfolgreich aktualisiert." }
         format.json { render :show, status: :ok, location: @author }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -54,7 +54,7 @@ class AuthorsController < ApplicationController
     @author.destroy!
 
     respond_to do |format|
-      format.html { redirect_to authors_path, status: :see_other, notice: "Author wurde erfolgreich gelöscht." }
+      format.html { redirect_to authors_path, status: :see_other, notice: "Autor wurde erfolgreich gelöscht." }
       format.json { head :no_content }
     end
   end

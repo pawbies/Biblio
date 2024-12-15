@@ -3,6 +3,10 @@ import { Controller } from "@hotwired/stimulus";
 export default class extends Controller {
   static targets = ["search", "checkboxContainer", "checkbox"]
 
+  connect() {
+    this.filter();
+  }
+
   filter() {
     const searchTerm = this.searchTarget.value.toLowerCase();
 

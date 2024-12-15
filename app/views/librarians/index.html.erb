@@ -30,7 +30,9 @@
           <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap flex">
             <%= link_to "Ansehen", librarian, class: "py-4 px-2 text-sm font-medium text-green-500 whitespace-nowrap" %>
             <%= link_to "Bearbeiten", edit_librarian_path(librarian), class: "py-4 px-2 text-sm font-medium text-blue-500 whitespace-nowrap" %>
-            <%= button_to "Löschen", librarian_path(librarian), method: :delete, class: "py-4 px-2 text-sm font-medium text-red-500 whitespace-nowrap" %>
+            <% unless Current.librarian.id == librarian.id %>
+              <%= button_to "Löschen", librarian_path(librarian), method: :delete, class: "py-4 px-2 text-sm font-medium text-red-500 whitespace-nowrap" %>
+            <% end %>
           </td>
         </tr>
       <% end %>

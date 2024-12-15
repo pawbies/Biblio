@@ -28,12 +28,14 @@
 
   <div class="my-5">
     <%= form.label :pfp %>
+    <small>(Optional)</small>
     <%= form.hidden_field :pfp, value: author.pfp.signed_id if author.pfp.attached? %>
     <%= form.file_field :pfp, direct_upload: true %>
   </div>
 
   <div class="my-5">
     <%= form.label :bio %>
+    <small>(Optional)</small>
     <%= form.text_area :bio, rows: 4, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 

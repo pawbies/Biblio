@@ -18,47 +18,69 @@
 
   <div class="my-5">
     <%= form.label :description %>
+    <small>(Optional)</small>
     <%= form.text_area :description, rows: 4, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
     <%= form.label :isbn %>
+    <small>(Optional)</small>
     <%= form.text_field :isbn, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
     <%= form.label :price %>
+    <small>(Optional)</small>
     <%= form.text_field :price, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="my-5">
     <%= form.label :publisher_id %>
-    <%= form.select :publisher_id, 
-                  options_for_select(Publisher.all.pluck(:name, :id), selected: @book.publisher_id), 
-                  { include_blank: "Select a publisher" }, 
-                  class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full js-searchable-dropdown", 
-                  data: { controller: "select2" } %>
+    <%= form.select :publisher_id, options_for_select(Publisher.all.pluck(:name, :id), selected: @book.publisher_id),
+      { include_blank: "Select a publisher" }, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full js-searchable-dropdown" %>
   </div>
 
-  <div class="my-5">
+  <div class="my-5" data-controller="dropdown">
     <%= form.label :category_ids %>
-    <div class="block shadow rounded-md border border-gray-400 px-3 py-2 mt-2 w-full">
-      <%= form.collection_check_boxes :category_ids, Category.all, :id, :name, class: "mr-2" do |b| %>
-        <div class="flex items-center my-2">
-          <%= b.check_box %>
-          <%= b.label class: "text-gray-700" %>
+    <small>(Optional)</small>
+    
+    <input 
+      type="text" 
+      placeholder="Suche..." 
+      data-dropdown-target="search" 
+      class="block w-full px-3 py-2 mb-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-gray-300"
+      data-action="input->dropdown#filter">
+    
+    <div 
+      class="block shadow rounded-md border border-gray-400 px-3 py-2 mt-2 w-full" 
+      data-dropdown-target="checkboxContainer" style="display: none">
+      <% Category.all.each do |category| %>
+        <div class="flex items-center my-2" style="display: none">
+          <%= check_box_tag "book[category_ids][]", category.id, book.category_ids.include?(category.id), class: "mr-2", data: { dropdown_target: "checkbox", action: "input->dropdown#filter" } %>
+          <%= label_tag "category_ids_#{book.id}", category.name, class: "text-gray-700" %>
         </div>
       <% end %>
     </div>
   </div>
 
-  <div class="my-5">
+  <div class="my-5" data-controller="dropdown">
     <%= form.label :author_ids %>
-    <div class="block shadow rounded-md border border-gray-400 px-3 py-2 mt-2 w-full">
-      <%= form.collection_check_boxes :author_ids, Author.all, :id, :display_name, class: "mr-2" do |b| %>
-        <div class="flex items-center my-2">
-          <%= b.check_box %>
-          <%= b.label class: "text-gray-700" %>
+    <small>(Optional)</small>
+    
+    <input 
+      type="text" 
+      placeholder="Suche..." 
+      data-dropdown-target="search" 
+      class="block w-full px-3 py-2 mb-2 border rounded-md shadow-sm focus:outline-none focus:ring focus:ring-gray-300"
+      data-action="input->dropdown#filter">
+    
+    <div 
+      class="block shadow rounded-md border border-gray-400 px-3 py-2 mt-2 w-full" 
+      data-dropdown-target="checkboxContainer" style="display: none">
+      <% Author.all.each do |author| %>
+        <div class="flex items-center my-2" style="display: none">
+          <%= check_box_tag "book[author_ids][]", author.id, book.author_ids.include?(author.id), class: "mr-2", data: { dropdown_target: "checkbox", action: "input->dropdown#filter" } %>
+          <%= label_tag "author_ids_#{book.id}", author.display_name, class: "text-gray-700" %>
         </div>
       <% end %>
     </div>
@@ -66,13 +88,14 @@
 
   <div class="my-5">
     <%= form.label :cover %>
+    <small>(Optional)</small>
     <%= form.hidden_field :cover, value: book.cover.signed_id if book.cover.attached? %>
     <%= form.file_field :cover, direct_upload: true %>
   </div>
 
   <div class="my-5">
     <%= form.label :amount %>
-    <%= form.number_field :amount, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
+    <%= form.number_field :amount, value: 1, min: 0, max: 100, class: "block shadow rounded-md border border-gray-400 outline-none px-3 py-2 mt-2 w-full" %>
   </div>
 
   <div class="inline">

@@ -31,7 +31,7 @@ class BorrowsController < ApplicationController
 
   # POST /borrows or /borrows.json
   def create
-    @borrow = Borrow.new(returned: false, librarian: Current.librarian, **borrow_params)
+    @borrow = Borrow.new(returned: false, librarian: Current.librarian, reviewed: false, **borrow_params)
 
     respond_to do |format|
       if @borrow.save
@@ -59,7 +59,7 @@ class BorrowsController < ApplicationController
 
   def update_finish
     if @borrow.email.present?
-      ReviewsMailer.with(borrow: @borrow).new
+      ReviewsMailer.with(borrow: @borrow).new.deliver_later
     end
 
     respond_to do |format|

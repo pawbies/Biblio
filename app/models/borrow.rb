@@ -6,6 +6,7 @@ class Borrow < ApplicationRecord
   validates :borrow_date, presence: true
   validates :return_date, presence: true
   validates :returned, inclusion: { in: [ true, false ] }
+  validates :reviewed, inclusion: { in: [ true, false ] }
   validates :firstname, presence: true, length: { maximum: 30 }
   validates :lastname, presence: true, length: { maximum: 30 }
   validates :phone, length: { maximum: 30 }
@@ -15,6 +16,10 @@ class Borrow < ApplicationRecord
   validate :min_one_book
 
   generates_token_for :review_token, expires_in: 24.hours
+
+  def reviewed?
+    reviews.any?
+  end
 
   private
 

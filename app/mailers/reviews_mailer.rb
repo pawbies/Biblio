@@ -1,5 +1,4 @@
 class ReviewsMailer < ApplicationMailer
-  # new
   def new
     @borrow = params[:borrow]
     @token = @borrow.generate_token_for(:review_token)

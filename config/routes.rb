@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get "reviews/new" => "reviews#new", as: :new_review
   post "reviews" => "reviews#create", as: :reviews
+  delete "reviews/:id" => "reviews#destroy", as: :review
+
   get "borrows/:id/finish" => "borrows#finish", as: :finish_borrow
   patch "borrows/:id/finish" => "borrows#update_finish", as: :update_finish
   resources :borrows

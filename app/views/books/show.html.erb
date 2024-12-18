@@ -113,6 +113,10 @@
                 <%= "#{review.borrow.firstname} #{review.borrow.lastname}" %>
               <% end %>
             </span>
+
+            <%= button_to review_path(review), method: :delete do %>
+              <i class="fa-solid fa-trash" style="color: #f50000;"></i>
+            <% end %>
           </div>
           <% unless review.message.empty? || review.message.nil? %>
             <p class="mt-3 text-gray-600">

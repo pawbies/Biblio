@@ -1,6 +1,7 @@
 class ReviewsController < ApplicationController
-  before_action :fetch_borrow
-  before_action :check_borrow
+  before_action :require_librarian!, only: %i[ destroy ]
+  before_action :fetch_borrow, except: %i[ destroy ]
+  before_action :check_borrow, except: %i[ destroy ]
 
   # GET /reviews/new
   def new
@@ -25,6 +26,13 @@ class ReviewsController < ApplicationController
     @borrow.update(reviewed: true)
 
     redirect_to root_path, notice: "Reviews wurden gespeichert."
+  end
+
+  def destroy
+    review = Review.find(params[:id])
+    review.destroy
+
+    redirect_back fallback_location: book_path(review.book), notice: "Review erfolgreich gelöscht"
   end
 
   private

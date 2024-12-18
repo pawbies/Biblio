@@ -14,6 +14,8 @@ class Borrow < ApplicationRecord
   validate :book_amount_check, if: :new_record?
   validate :min_one_book
 
+  generates_token_for :review_token, expires_in: 24.hours
+
   private
 
   def min_one_book
@@ -22,6 +24,7 @@ class Borrow < ApplicationRecord
 
   def book_amount_check
     titles = []
+
     books.each do |book|
       titles.push(book.title) if book.effective_amount <= 0
     end

@@ -256,7 +256,6 @@ GEM
       logger
     rubyzip (2.3.2)
     securerandom (0.3.2)
-    select2-rails (4.0.13)
     selenium-webdriver (4.26.0)
       base64 (~> 0.2)
       logger (~> 1.4)
@@ -322,7 +321,6 @@ DEPENDENCIES
   puma (>= 5.0)
   rails (~> 7.2.2)
   rubocop-rails-omakase
-  select2-rails
   selenium-webdriver
   sprockets-rails
   sqlite3 (>= 1.4)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_18_160127) do
+ActiveRecord::Schema[7.2].define(version: 2024_12_22_093532) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -121,6 +121,14 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_18_160127) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "reports", force: :cascade do |t|
+    t.integer "review_id", null: false
+    t.text "message", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["review_id"], name: "index_reports_on_review_id"
+  end
+
   create_table "reviews", force: :cascade do |t|
     t.text "message", limit: 300
     t.integer "rating", null: false
@@ -137,6 +145,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_18_160127) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "books", "publishers"
   add_foreign_key "borrows", "librarians"
+  add_foreign_key "reports", "reviews"
   add_foreign_key "reviews", "books"
   add_foreign_key "reviews", "borrows"
 end

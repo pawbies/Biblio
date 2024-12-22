@@ -65,7 +65,7 @@
           <ul class="mt-2 flex flex-wrap gap-2">
             <% @book.categories.each do |category| %>
               <li class="px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-sm shadow">
-                <%= category.name %>
+                <%= link_to category.name, category %>
               </li>
             <% end %>
           </ul>
@@ -96,34 +96,7 @@
 
     <div class="mt-6 space-y-6">
       <% @book.reviews.each do |review| %>
-        <div class="border-b border-gray-200 pb-6">
-          <div class="flex items-center gap-4">
-            <div class="flex">
-              <% review.rating.times do %>
-                <i class="fas fa-star text-yellow-400"></i>
-              <% end %>
-              <% (5 - review.rating).times do %>
-                <i class="fas fa-star text-gray-400"></i>
-              <% end %>
-            </div>
-            <span class="text-sm font-medium text-gray-700">
-              <% if review.anonymous %>
-                Anonym
-              <% else %>
-                <%= "#{review.borrow.firstname} #{review.borrow.lastname}" %>
-              <% end %>
-            </span>
-
-            <%= button_to review_path(review), method: :delete do %>
-              <i class="fa-solid fa-trash" style="color: #f50000;"></i>
-            <% end %>
-          </div>
-          <% unless review.message.empty? || review.message.nil? %>
-            <p class="mt-3 text-gray-600">
-              <%= review.message %>
-            </p>
-          <% end %>
-        </div>
+        <%= render review %>
       <% end %>
     </div>
 

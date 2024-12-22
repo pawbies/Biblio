@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   get "borrows/:id/finish" => "borrows#finish", as: :finish_borrow
   patch "borrows/:id/finish" => "borrows#update_finish", as: :update_finish
+  resources :reports, except: %i[ edit update ]
   resources :borrows
   resources :books
   resources :publishers
@@ -25,6 +26,6 @@ Rails.application.routes.draw do
   get "search" => "pages#search", as: :search
 
   get "login" => "sessions#login"
-  get "logout" => "sessions#logout"
+  post "logout" => "sessions#logout"
   post "login-verify" => "sessions#login_verify"
 end

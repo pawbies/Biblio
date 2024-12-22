@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  review: one
+  message: MyText
+  done: false
+  librarian: one
+
+two:
+  review: two
+  message: MyText
+  done: false
+  librarian: two

@@ -17,6 +17,11 @@ class PagesController < ApplicationController
           "firstname LIKE :query OR lastname LIKE :query OR artistname LIKE :query",
           query: "%#{@query}%"
         ).page(params[:author_page] || 1)
+      @categories =
+        Category.where(
+          "name LIKE :query",
+          query: "%#{@query}%"
+        ).page(params[:category_page] || 1)
     else
       @query = nil
       @books = nil

@@ -1,0 +1,49 @@
+<div class="space-y-6 bg-white p-6 rounded-md shadow-md border border-gray-200">
+    <div>
+        <h2 class="text-lg font-semibold text-gray-800 border-b border-gray-300 pb-2">
+            Review
+            <%= link_to "Ansehen", book_path(report.review.book, anchor: dom_id(report.review)), id: report.id, class: "py-4 px-2 text-sm font-medium text-green-500 whitespace-nowrap" %>
+        </h2>
+        <p class="mt-2 text-gray-600">
+            <%= report.review.message %>
+        </p>
+        <small class="mt-2 text-gray-600 flex flex-row">
+            Von <%= "#{report.review.borrow.firstname} #{report.review.borrow.lastname}" %>
+            <%= "(Anonym)" if report.review.anonymous %>
+
+            <div class="relative ml-3" data-controller="review">
+                <button class="text-gray-600 hover:text-gray-800" data-action="click->review#toggle">
+                    <i class="fa-solid fa-address-book text-gray-700"></i>
+                </button>
+                <div class="hidden absolute right-0 mt-2 p-2 min-w-48 whitespace-nowrap bg-white border border-gray-200 rounded-md shadow-lg" data-review-target="menu">
+                    <h2 class="text-center font-semibold"><%= report.review.name %></h2>
+                    <ul>
+                        <li>
+                            <i class="fa-solid fa-envelope"></i>
+                            <%= report.review.borrow.email.present? ? report.review.borrow.email : "Nicht verfügbar" %>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-phone"></i>
+                            <%= report.review.borrow.phone.present? ? report.review.borrow.phone : "Nicht verfügbar" %>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </small>
+        
+    </div>
+
+    <div>
+        <h2 class="text-lg font-semibold text-gray-800 border-b border-gray-300 pb-2">Report Nachricht</h2>
+        <p class="mt-2 text-gray-600">
+            <%= report.message %>
+        </p>
+    </div>
+
+    <div class="text-sm text-gray-500">
+        <p>
+            <strong class="font-medium text-gray-700">Reported am:</strong>
+            <%= report.created_at.strftime("%B %d, %Y at %I:%M %p") %>
+        </p>
+    </div>
+</div>

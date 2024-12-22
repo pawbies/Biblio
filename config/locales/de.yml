@@ -98,6 +98,10 @@ de:
       librarian: "Bibliothekar"
       author: "Autor"
       book: "Buch"
+      category: "Kategorie"
+      publisher: "Verlag"
+      Review: "Review"
+      Report: "Report"
 
 
     attributes:
@@ -152,3 +156,7 @@ de:
         name: "Name"
         email: "Email"
         url: "URL"
+      
+      report:
+        review_id: "Review"
+        message: "Nachricht"

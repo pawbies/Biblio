@@ -1,0 +1,41 @@
+<div class="border-b border-gray-200 pb-6" data-controller="dropdown" id="<%= dom_id review %>">
+    <div class="flex items-center gap-4">
+        <div class="flex">
+            <% review.rating.times do %>
+                <i class="fas fa-star text-yellow-400"></i>
+            <% end %>
+            <% (5 - review.rating).times do %>
+                <i class="fas fa-star text-gray-400"></i>
+            <% end %>
+        </div>
+        <span class="text-sm font-medium text-gray-700">
+            <% if review.anonymous %>
+                Anonym
+            <% else %>
+                <%= "#{review.borrow.firstname} #{review.borrow.lastname}" %>
+            <% end %>
+        </span>
+
+        <div class="relative" data-controller="review">
+            <button class="text-gray-600 hover:text-gray-800" data-action="click->review#toggle">
+                <i class="fas fa-ellipsis-v"></i>
+            </button>
+            <div class="hidden absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg" data-review-target="menu">
+                <% if Current.librarian.present? %>
+                    <%= button_to review_path(review), method: :delete, class: "w-full flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-red-100 hover:text-red-600 text-left" do %>
+                        <i class="fa-solid fa-trash text-red-500"></i> Delete
+                    <% end %>
+                <% end %>
+                <%= button_to new_report_path, method: :get, params: { review_id: review.id }, class: "w-full flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900 text-left" do %>
+                    <i class="fa-solid fa-flag text-blue-500"></i> Report
+                <% end %>
+            </div>
+        </div>
+    </div>
+
+    <% unless review.message.empty? || review.message.nil? %>
+        <p class="mt-3 text-gray-600">
+            <%= review.message %>
+        </p>
+    <% end %>
+</div>

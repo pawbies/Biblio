@@ -28,4 +28,8 @@ Rails.application.routes.draw do
   get "login" => "sessions#login"
   post "logout" => "sessions#logout"
   post "login-verify" => "sessions#login_verify"
+
+
+  get "imprint" => "pages#imprint"
+  get "contact" => "pages#contact"
 end

@@ -34,7 +34,7 @@
           <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap flex">
             <%= link_to "Ansehen", publisher, class: "py-4 px-2 text-sm font-medium text-green-500 whitespace-nowrap" %>
             <%= link_to "Bearbeiten", edit_publisher_path(publisher), class: "py-4 px-2 text-sm font-medium text-blue-500 whitespace-nowrap" %>
-            <%= button_to "Löschen", publisher_path(publisher), method: :delete, class: "py-4 px-2 text-sm font-medium text-red-500 whitespace-nowrap" %>
+            <%= button_to "Löschen", publisher_path(publisher), method: :delete, data: { turbo_confirm: "Diesen Verlag wirklich löschen?" }, class: "py-4 px-2 text-sm font-medium text-red-500 whitespace-nowrap" %>
           </td>
         </tr>
       <% end %>

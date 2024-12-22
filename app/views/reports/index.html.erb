@@ -31,7 +31,7 @@
           <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap"><%= report.review.reports.count %></td>
           <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap flex">
             <%= link_to "Ansehen", report, class: "py-4 px-2 text-sm font-medium text-green-500 whitespace-nowrap" %>
-            <%= button_to "Report Verwerfen", report_path(report), method: :delete, class: "py-4 px-2 text-sm font-medium text-red-500 whitespace-nowrap" %>
+            <%= button_to "Report Verwerfen", report_path(report), method: :delete, data: { turbo_confirm: "Wirklich löschen?" }, class: "py-4 px-2 text-sm font-medium text-red-500 whitespace-nowrap" %>
           </td>
         </tr>
       <% end %>

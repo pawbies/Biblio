@@ -24,8 +24,15 @@ class PagesController < ApplicationController
         ).page(params[:category_page] || 1)
     else
       @query = nil
-      @books = nil
+      @books = []
       @authors = []
+      @categories = []
     end
+  end
+
+  def imprint
+  end
+
+  def contact
   end
 end

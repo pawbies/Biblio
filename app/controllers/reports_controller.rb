@@ -1,7 +1,7 @@
 class ReportsController < ApplicationController
   before_action :set_report, only: %i[ show destroy ]
-  before_action :require_librarian!, except: %i[ new ]
-  layout "admin", except: %i[ new ]
+  before_action :require_librarian!, except: %i[ new create ]
+  layout "admin", except: %i[ new create]
 
   # GET /reports or /reports.json
   def index

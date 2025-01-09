@@ -5,7 +5,7 @@ class BorrowsController < ApplicationController
 
   # GET /borrows or /borrows.json
   def index
-    @borrows = Borrow.all.where(returned: false).page(params[:page]).per(30)
+    @borrows = Borrow.all.order(:return_date).where(returned: false).page(params[:page]).per(30)
   end
 
   def archive

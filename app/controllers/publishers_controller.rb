@@ -5,7 +5,7 @@ class PublishersController < ApplicationController
 
   # GET /publishers or /publishers.json
   def index
-    @publishers = Publisher.all.page(params[:page]).per(30)
+    @publishers = Publisher.all.order(:name).page(params[:page]).per(30)
   end
 
   # GET /publishers/1 or /publishers/1.json

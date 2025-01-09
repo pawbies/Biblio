@@ -5,7 +5,7 @@ class LibrariansController < ApplicationController
 
   # GET /librarians or /librarians.json
   def index
-    @librarians = Librarian.all.page(params[:page]).per(30)
+    @librarians = Librarian.all.order(:firstname).page(params[:page]).per(30)
   end
 
   # GET /librarians/1 or /librarians/1.json
